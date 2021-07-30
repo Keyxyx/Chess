@@ -4888,8 +4888,6 @@
         Dim y_coord_string As String
         x_coord_string = Mid(Name_of_button_, 7, 1)
         y_coord_string = Mid(Name_of_button_, 8, 1)
-
-
         Dim starting_x As String
         Dim starting_y As String
         x_coord_string = Mid(Name_of_button_, 7, 1)
@@ -4914,9 +4912,6 @@
                 Exit Sub
             End If
 
-
-
-
             If Mid(piece_name, 1, 1) = "B" Then
                 black_moved_last = True
                 white_moved_last = False
@@ -4936,18 +4931,6 @@
         Call Looking_for_win_lose_condition()
         Call Making_white_pieces_have_red_font(x_coord_string, y_coord_string)
 
-
-    End Sub
-
-    Private Sub Label8_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Label1_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
 
     End Sub
 End Class
