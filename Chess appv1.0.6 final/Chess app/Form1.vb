@@ -5,10 +5,6 @@
     Dim black_moved_last As Boolean
     Dim white_moved_last As Boolean
 
-
-
-
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim imaginary_but As Button
             For x As Integer = 0 To 7
@@ -28,11 +24,9 @@
 
     Private Sub ReadCSVFileToArray()
         Dim piece_name As String()
-
         Using importnames As New Microsoft.VisualBasic.FileIO.TextFieldParser("..\importnames.txt")
             importnames.TextFieldType = FileIO.FieldType.Delimited
             importnames.SetDelimiters(",")
-
             Dim t As Integer
             Dim y As Integer
             Dim x As Integer
@@ -60,7 +54,6 @@
                 For x As Integer = 0 To 7
                     Imaginary_but = Me.Controls("button" & x & y)
                     Imaginary_but.Text = chess_board_not_for_moving(x, y)
-
                 Next
             Next
     End Sub
@@ -69,66 +62,32 @@
         Dim piece_code As String
         Dim piece_name As String
         piece_name = chess_board_not_for_moving(x_coord_string, y_coord_string)
-
         If black_moved_last = True And Mid(piece_name, 1, 1) = "B" Then
             TextBox1.Text = "Its not your move"
             Exit Sub
         End If
-
         If white_moved_last = True And Mid(piece_name, 1, 1) = "W" Then
             TextBox1.Text = "Its not your move"
             Exit Sub
         End If
-
         piece_code = Mid(piece_name, 3, 1)
-
         Select Case piece_code
-
-
             Case = "R"
                 Call moving_straight(x_coord_string, y_coord_string)
-
             Case = "B"
                 Call moving_diagonally(x_coord_string, y_coord_string)
-
-
-
             Case = "K"
                 Call king_movement(x_coord_string, y_coord_string)
             Case = "Q"
-
-
-
                 Call moving_diagonally(x_coord_string, y_coord_string)
                 Call moving_straight(x_coord_string, y_coord_string)
-
-
-
             Case = "N"
-
                 Call kNight_Movement(x_coord_string, y_coord_string)
-
-
-
-                '''''''''''''''''''''''''''''''''''''''''''
-
             Case = ""
-
-                ''''''''''''''''''''''''''''''''''''''''''''
-
             Case = "P"
-
                 Call Pawn_movement(x_coord_string, y_coord_string)
-
-
                 'check pawn movement , cant move after been moved once
-
         End Select
-
-
-
-
-
     End Sub
 
     Private Sub King_movement(x_coord_string, y_coord_string)
@@ -140,100 +99,69 @@
         y_coord_saved = y_coord_string
         imaginary_button_local = Me.Controls("button" & x_coord_saved & y_coord_saved)
         king_string = imaginary_button_local.Text
-
         Try
             imaginary_button_local = Me.Controls("button" & x_coord_string + 1 & y_coord_string)
             If imaginary_button_local.Text = "" Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) = Mid(king_string, 1, 1) Then
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) <> Mid(king_string, 1, 1) Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
             End If
             x_coord_string = x_coord_saved
             y_coord_string = y_coord_saved
             Catch ex As Exception
-
         End Try
-
         Try
             imaginary_button_local = Me.Controls("button" & x_coord_string - 1 & y_coord_string)
             If imaginary_button_local.Text = "" Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) = Mid(king_string, 1, 1) Then
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) <> Mid(king_string, 1, 1) Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
-
             End If
             x_coord_string = x_coord_saved
             y_coord_string = y_coord_saved
-
         Catch ex As Exception
-
         End Try
-
 
         Try
             imaginary_button_local = Me.Controls("button" & x_coord_string & y_coord_string - 1)
             If imaginary_button_local.Text = "" Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) = Mid(king_string, 1, 1) Then
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) <> Mid(king_string, 1, 1) Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
-
             End If
             x_coord_string = x_coord_saved
             y_coord_string = y_coord_saved
-
         Catch ex As Exception
-
         End Try
 
         Try
             imaginary_button_local = Me.Controls("button" & x_coord_string & y_coord_string + 1)
             If imaginary_button_local.Text = "" Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) = Mid(king_string, 1, 1) Then
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) <> Mid(king_string, 1, 1) Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
             End If
             x_coord_string = x_coord_saved
             y_coord_string = y_coord_saved
         Catch ex As Exception
-
         End Try
 
         Try
             imaginary_button_local = Me.Controls("button" & x_coord_string - 1 & y_coord_string + 1)
             If imaginary_button_local.Text = "" Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) = Mid(king_string, 1, 1) Then
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) <> Mid(king_string, 1, 1) Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
             End If
             x_coord_string = x_coord_saved
             y_coord_string = y_coord_saved
         Catch ex As Exception
-
         End Try
-
-
         Try
             imaginary_button_local = Me.Controls("button" & x_coord_string + 1 & y_coord_string - 1)
             If imaginary_button_local.Text = "" Then
@@ -252,46 +180,31 @@
             imaginary_button_local = Me.Controls("button" & x_coord_string - 1 & y_coord_string - 1)
             If imaginary_button_local.Text = "" Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) = Mid(king_string, 1, 1) Then
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) <> Mid(king_string, 1, 1) Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
             End If
             x_coord_string = x_coord_saved
             y_coord_string = y_coord_saved
-
         Catch ex As Exception
-
         End Try
-
         Try
             imaginary_button_local = Me.Controls("button " & x_coord_string + 1 & y_coord_string - 1)
             If imaginary_button_local.Text = "" Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) = Mid(king_string, 1, 1) Then
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) <> Mid(king_string, 1, 1) Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
-
-
             End If
             x_coord_string = x_coord_saved
             y_coord_string = y_coord_saved
 
         Catch ex As Exception
-
         End Try
-
         Try
             imaginary_button_local = Me.Controls("button" & x_coord_string + 1 & y_coord_string + 1)
             If imaginary_button_local.Text = "" Then
                 imaginary_button_local.BackColor = Color.LightGreen
-
             ElseIf Mid(imaginary_button_local.Text, 1, 1) = Mid(king_string, 1, 1) Then
 
             ElseIf Mid(imaginary_button_local.Text, 1, 1) <> Mid(king_string, 1, 1) Then
@@ -324,17 +237,11 @@
             For X = 0 To 7
                 imaginary_button_local = Me.Controls("button" & X & Y)
                     If imaginary_button_local.Text = "W1K" Then
-
-
                     ElseIf imaginary_button_local.Text <> "W1K" Then
                         king_is_not_here += 1
-
                     ElseIf imaginary_button_local.Text <> "B1K" Then
                         king_is_not_here += 1
-
                     ElseIf imaginary_button_local.Text = "W1K" Then
-
-
                     End If
             Next
         Next
@@ -342,18 +249,14 @@
     End Sub
 
     Private Sub Pawn_movement(x_coord_string, y_coord_string)
-
         Dim imaginary_button_local As Button
-
         If Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) = "W" Then    ' is this piece a white piece, chess_borad_not_for_moiving = WP1 , so it looks at the 1st character and checks if its a W
             Try
                 If Mid(chess_board_not_for_moving(x_coord_string - 1, y_coord_string + 1), 1, 1) = "B" Then
                     imaginary_button_local = Me.Controls("button" & x_coord_string - 1 & y_coord_string + 1)
                     imaginary_button_local.BackColor = Color.LightGreen
-
                 End If
             Catch ex As Exception
-
             End Try
 
             Try
@@ -361,13 +264,10 @@
                     imaginary_button_local = Me.Controls("button" & x_coord_string + 1 & y_coord_string + 1)
                     imaginary_button_local.BackColor = Color.LightGreen
                 End If
-
-            
             End Try
 
             Try 'this is made into a try so that it wont crash out because it trys to make a square that dosnt exist green 
                 If chess_board_not_for_moving(x_coord_string, y_coord_string + 1) = "" Then  ' is the piece below this empty of other pieces? 
-
                     imaginary_button_local = Me.Controls("button" & x_coord_string & y_coord_string + 1)  'refrences the piece below our pawn 
                     imaginary_button_local.BackColor = Color.LightGreen
                     If y_coord_string = 1 Then
@@ -629,10 +529,8 @@
 
     Private Sub washing_green_color()
         Dim imaginary_but As Button
-
         For y As Integer = 0 To 7
             For x As Integer = 0 To 7
-
                 If (x + y) Mod 2 = 0 Then
                     imaginary_but = Me.Controls("button" & x & y)
                     imaginary_but.BackColor = Color.White
@@ -640,209 +538,132 @@
                     imaginary_but = Me.Controls("button" & x & y)
                     imaginary_but.BackColor = Color.Black
                 End If
-
-
-
-
             Next
         Next
-
-
-
-
-
-
     End Sub
 
     Private Sub kNight_Movement(x_coord_string, y_coord_string)
         Dim imaginary_but As Button
-
         Try
             If Mid(chess_board_not_for_moving(x_coord_string + 2, y_coord_string + 1), 1, 1) = "" Then
                 imaginary_but = Me.Controls("button" & x_coord_string + 2 & y_coord_string + 1)
                 imaginary_but.BackColor = Color.LightGreen
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string + 2, y_coord_string + 1), 1, 1) = Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string + 2, y_coord_string + 1), 1, 1) <> Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
                 imaginary_but = Me.Controls("button" & x_coord_string + 2 & y_coord_string + 1)
                 imaginary_but.BackColor = Color.LightGreen
-
                 If Mid(chess_board_not_for_moving(x_coord_string + 2, y_coord_string + 1), 1, 1) = "1K" Then
-
                     Call Finding_what_pieces_are_checking_the_king(x_coord_string, y_coord_string)
                 End If
-
-
-
             End If
         Catch ex As Exception
-
         End Try
-
 
         Try
             If Mid(chess_board_not_for_moving(x_coord_string + 2, y_coord_string - 1), 1, 1) = "" Then
                 imaginary_but = Me.Controls("button" & x_coord_string + 2 & y_coord_string - 1)
                 imaginary_but.BackColor = Color.LightGreen
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string + 2, y_coord_string - 1), 1, 1) = Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string + 2, y_coord_string - 1), 1, 1) <> Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
                 imaginary_but = Me.Controls("button" & x_coord_string + 2 & y_coord_string - 1)
                 imaginary_but.BackColor = Color.LightGreen
-
                 If Mid(chess_board_not_for_moving(x_coord_string + 2, y_coord_string - 1), 1, 1) = "1K" Then
-
                     Call Finding_what_pieces_are_checking_the_king(x_coord_string, y_coord_string)
                 End If
-
             End If
         Catch ex As Exception
-
         End Try
-
 
         Try
             If Mid(chess_board_not_for_moving(x_coord_string - 2, y_coord_string + 1), 1, 1) = "" Then
                 imaginary_but = Me.Controls("button" & x_coord_string - 2 & y_coord_string + 1)
                 imaginary_but.BackColor = Color.LightGreen
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string - 2, y_coord_string + 1), 1, 1) = Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string - 2, y_coord_string + 1), 1, 1) <> Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
                 imaginary_but = Me.Controls("button" & x_coord_string - 2 & y_coord_string + 1)
                 imaginary_but.BackColor = Color.LightGreen
-
-
                 If Mid(chess_board_not_for_moving(x_coord_string - 2, y_coord_string + 1), 1, 1) = "1K" Then
-
                     Call Finding_what_pieces_are_checking_the_king(x_coord_string, y_coord_string)
                 End If
-
             End If
         Catch ex As Exception
-
         End Try
 
         Try
             If Mid(chess_board_not_for_moving(x_coord_string - 2, y_coord_string - 1), 1, 1) = "" Then
                 imaginary_but = Me.Controls("button" & x_coord_string - 2 & y_coord_string - 1)
                 imaginary_but.BackColor = Color.LightGreen
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string - 2, y_coord_string - 1), 1, 1) = Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
-
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string - 2, y_coord_string - 1), 1, 1) <> Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
                 imaginary_but = Me.Controls("button" & x_coord_string - 2 & y_coord_string - 1)
                 imaginary_but.BackColor = Color.LightGreen
-
                 If Mid(chess_board_not_for_moving(x_coord_string - 2, y_coord_string - 1), 1, 1) = "1K" Then
-
                     Call Finding_what_pieces_are_checking_the_king(x_coord_string, y_coord_string)
                 End If
-
             End If
         Catch ex As Exception
-
         End Try
 
         Try
             If Mid(chess_board_not_for_moving(x_coord_string - 1, y_coord_string + 2), 1, 1) = "" Then
                 imaginary_but = Me.Controls("button" & x_coord_string - 1 & y_coord_string + 2)
                 imaginary_but.BackColor = Color.LightGreen
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string - 1, y_coord_string + 2), 1, 1) = Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string - 1, y_coord_string + 2), 1, 1) <> Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
                 imaginary_but = Me.Controls("button" & x_coord_string - 1 & y_coord_string + 2)
                 imaginary_but.BackColor = Color.LightGreen
-
                 If Mid(chess_board_not_for_moving(x_coord_string - 1, y_coord_string + 2), 1, 1) = "1K" Then
-
                     Call Finding_what_pieces_are_checking_the_king(x_coord_string, y_coord_string)
                 End If
-
             End If
-
         Catch ex As Exception
-
         End Try
 
         Try
             If Mid(chess_board_not_for_moving(x_coord_string + 1, y_coord_string + 2), 1, 1) = "" Then
                 imaginary_but = Me.Controls("Button" & x_coord_string + 1 & y_coord_string + 2)
                 imaginary_but.BackColor = Color.LightGreen
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string + 1, y_coord_string + 2), 1, 1) = Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string + 1, y_coord_string + 2), 1, 1) <> Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
                 imaginary_but = Me.Controls("button" & x_coord_string + 1 & y_coord_string + 2)
                 imaginary_but.BackColor = Color.LightGreen
-
                 If Mid(chess_board_not_for_moving(x_coord_string + 1, y_coord_string + 2), 1, 1) = "1K" Then
-
                     Call Finding_what_pieces_are_checking_the_king(x_coord_string, y_coord_string)
                 End If
-
             End If
         Catch ex As Exception
-
         End Try
 
         Try
             If Mid(chess_board_not_for_moving(x_coord_string + 1, y_coord_string - 2), 1, 1) = "" Then
                 imaginary_but = Me.Controls("button" & x_coord_string + 1 & y_coord_string - 2)
                 imaginary_but.BackColor = Color.LightGreen
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string + 1, y_coord_string - 2), 1, 1) = Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string + 1, y_coord_string - 2), 1, 1) <> Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
                 imaginary_but = Me.Controls("button" & x_coord_string + 1 & y_coord_string - 2)
                 imaginary_but.BackColor = Color.LightGreen
-
                 If Mid(chess_board_not_for_moving(x_coord_string + 1, y_coord_string - 2), 1, 1) = "1K" Then
-
                     Call Finding_what_pieces_are_checking_the_king(x_coord_string, y_coord_string)
                 End If
-
-
-
             End If
         Catch ex As Exception
-
         End Try
-
 
         Try
             If Mid(chess_board_not_for_moving(x_coord_string - 1, y_coord_string - 2), 1, 1) = "" Then
                 imaginary_but = Me.Controls("button" & x_coord_string - 1 & y_coord_string - 2)
                 imaginary_but.BackColor = Color.LightGreen
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string - 1, y_coord_string - 2), 1, 1) = Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
-
             ElseIf Mid(chess_board_not_for_moving(x_coord_string - 1, y_coord_string - 2), 1, 1) <> Mid(chess_board_not_for_moving(x_coord_string, y_coord_string), 1, 1) Then
                 imaginary_but = Me.Controls("button" & x_coord_string - 1 & y_coord_string - 2)
                 imaginary_but.BackColor = Color.LightGreen
-
-
                 If Mid(chess_board_not_for_moving(x_coord_string - 1, y_coord_string - 2), 1, 1) = "1K" Then
-
                     Call Finding_what_pieces_are_checking_the_king(x_coord_string, y_coord_string)
                 End If
-
             End If
         Catch ex As Exception
-
         End Try
-
-
-
-
         'While (x_coord_string + n_used_to_scan) < 8 And (y_coord_string + n_used_to_scan) >= 0 And (x_coord_string - n_used_to_scan) <= 7 And (y_coord_string - n_used_to_scan) <= 7
-
-
-
     End Sub
 
     Private Sub moving_pieces_into_box(target_location, last_piece_clicked, x_coord_string, y_coord_string, starting_x, starting_y)
@@ -887,32 +708,16 @@
             white_moved_last = True
         End If
 
-
-
-
-
-
         imaginary_button_local_variable_starting_location = Me.Controls(last_piece_clicked)
         imaginary_button_local_variable_target_location = Me.Controls(target_location)
         imaginary_button_local_variable_target_location.text = imaginary_button_local_variable_starting_location.Text
         imaginary_button_local_variable_starting_location.Text = ""
-
-
         x_coord_string_starting = Mid(last_piece_clicked, 7, 1)
         y_coord_string_starting = Mid(last_piece_clicked, 8, 1)
         chess_board_not_for_moving(x_coord_string, y_coord_string) = chess_board_not_for_moving(x_coord_string_starting, y_coord_string_starting)
         chess_board_not_for_moving(x_coord_string_starting, y_coord_string_starting) = ""
-
-
-
-
         piece_name = chess_board_not_for_moving(starting_x, starting_y)
-
-
         Call washing_green_color()
-
-
-
     End Sub
     Private Sub Button00_Click(sender As Object, e As EventArgs) Handles Button00.Click
 
@@ -3025,7 +2830,6 @@
     End Sub
 
     Private Sub Button24_Click(sender As Object, e As EventArgs) Handles Button24.Click
-
         Dim this_button As Button = CType(sender, Button)
         Dim Name_of_button_ As String = this_button.Name
         Dim piece_name As String
@@ -3924,9 +3728,6 @@
     Private Sub Button06_Click(sender As Object, e As EventArgs) Handles Button06.Click
         Dim this_button As Button = CType(sender, Button)
         Dim Name_of_button_ As String = this_button.Name
-
-
-
         Dim x_coord_string As String
         Dim y_coord_string As String
         x_coord_string = Mid(Name_of_button_, 7, 1)
@@ -3991,9 +3792,6 @@
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
         Dim this_button As Button = CType(sender, Button)
         Dim Name_of_button_ As String = this_button.Name
-
-
-
         Dim x_coord_string As String
         Dim y_coord_string As String
         x_coord_string = Mid(Name_of_button_, 7, 1)
@@ -4326,14 +4124,10 @@
     Private Sub Button66_Click(sender As Object, e As EventArgs) Handles Button66.Click
         Dim this_button As Button = CType(sender, Button)
         Dim Name_of_button_ As String = this_button.Name
-
-
-
         Dim x_coord_string As String
         Dim y_coord_string As String
         x_coord_string = Mid(Name_of_button_, 7, 1)
         y_coord_string = Mid(Name_of_button_, 8, 1)
-
         Dim starting_x As String
         Dim starting_y As String
         x_coord_string = Mid(Name_of_button_, 7, 1)
